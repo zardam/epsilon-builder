@@ -7,7 +7,7 @@ OPTIONS="${3:-EPSILON_DEVICE_BENCH=0 EPSILON_USB_DFU_XIP=0 EPSILON_ONBOARDING_AP
 
 echo Building ${REPO} branch ${BRANCH} with options ${OPTIONS}
 
-git clone --depth 1 --branch ${BRANCH} ${REPO} epsilon
+git clone --recurse-submodules -j $(nproc) --depth 1 --branch ${BRANCH} ${REPO} epsilon
 time make -j $(nproc) -C epsilon ${OPTIONS} build/device/n0110/epsilon_two_binaries
 dfu-util -a 0 -D epsilon/build/device/n0110/epsilon.internal.bin -s 0x08000000
 dfu-util -a 0 -D epsilon/build/device/n0110/epsilon.external.bin -s 0x90000000
