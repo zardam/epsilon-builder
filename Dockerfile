@@ -2,6 +2,7 @@ FROM debian:buster-slim
 
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
+  automake-1.15 \
   bison \
   build-essential \
   ca-certificates \
@@ -14,8 +15,10 @@ RUN apt-get update && \
   libnewlib-arm-none-eabi \
   libpng-dev \
   libstdc++-arm-none-eabi-newlib \
-  pkgconf \
-  python && \
+  pkg-config \
+  python \
+  python3 \
+  texinfo && \
   apt-get clean
 
 COPY ./build /
